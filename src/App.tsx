@@ -18,6 +18,15 @@ function App() {
     }
   }
 
+  const test = async () => {
+    const bee = new Bee("http://localhost:1633");
+
+    const fileHash = await bee.uploadFile("Bee is awesome!");
+    const retrievedData = await bee.downloadFile(fileHash);
+
+    console.log(retrievedData.toString()); // prints 'Bee is awesome!'
+  }
+
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target && e.target.files && e.target.files[0]
 
@@ -30,6 +39,7 @@ function App() {
         <input type="file" name="file" onChange={onFileChange} />
         <input type="submit" />
       </form>
+      <button onClick={test}>test</button>
     </div>
   );
 }
